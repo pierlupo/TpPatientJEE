@@ -24,27 +24,24 @@ public class Patient {
 
     private String tel;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "patient")
-    private List<Consultation> consultations;
 
-    @OneToMany(mappedBy = "patient")
-    private List<Prescription> prescriptions;
 
+    @OneToMany(mappedBy = "patient", fetch = FetchType.EAGER)
+    List<Consultation> consultations;
     public Patient(){
 
     }
 
-    public Patient(String lastName, String firstName, String email, String tel, List<Consultation> consultations, List<Prescription> prescriptions) {
+    public Patient(String lastName, String firstName, String email, String tel, List<Consultation> consultations) {
         this.lastName = lastName;
         this.firstName = firstName;
         this.email = email;
         this.tel = tel;
         this.consultations = consultations;
-        this.prescriptions = prescriptions;
     }
 
-    public Patient(int id, String lastName, String firstName, String email, String tel, List<Consultation> consultations, List<Prescription> prescriptions) {
-        this(lastName, firstName, email, tel, consultations, prescriptions);
+    public Patient(int id, String lastName, String firstName, String email, String tel, List<Consultation> consultations) {
+        this(lastName, firstName, email, tel, consultations);
         this.id = id;
     }
 
@@ -103,13 +100,6 @@ public class Patient {
         this.consultations = consultations;
     }
 
-    public List<Prescription> getPrescriptions() {
-        return prescriptions;
-    }
-
-    public void setPrescriptions(List<Prescription> prescriptions) {
-        this.prescriptions = prescriptions;
-    }
 
     @Override
     public String toString() {
@@ -120,7 +110,6 @@ public class Patient {
                 ", email='" + email + '\'' +
                 ", tel='" + tel + '\'' +
                 ", consultations=" + consultations +
-                ", prescriptions=" + prescriptions +
                 '}';
     }
 }

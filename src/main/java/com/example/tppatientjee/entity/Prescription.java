@@ -16,19 +16,10 @@ public class Prescription {
     @Temporal(TemporalType.DATE)
     private Date date;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name="patient_id")
-    private Patient patient;
+    @OneToOne()
+    private Consultation consultation;
 
     public Prescription() {
-    }
-
-    public Patient getPatient() {
-        return patient;
-    }
-
-    public void setPatient(Patient patient) {
-        this.patient = patient;
     }
 
     public int getId() {
@@ -55,13 +46,21 @@ public class Prescription {
         this.date = date;
     }
 
+    public Consultation getConsultation() {
+        return consultation;
+    }
+
+    public void setConsultation(Consultation consultation) {
+        this.consultation = consultation;
+    }
+
     @Override
     public String toString() {
         return "Prescription{" +
                 "id=" + id +
                 ", medicine='" + medicine + '\'' +
                 ", date=" + date +
-                ", patient=" + patient +
+                ", consultation=" + consultation +
                 '}';
     }
 }
