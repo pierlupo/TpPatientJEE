@@ -9,30 +9,49 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Liste de Produits</title>
+    <title>Patientèle</title>
     <jsp:include page="../includes/head.jsp" />
 </head>
 <body>
+<a href="patientlist"><jsp:include page="../includes/header.jsp" /><a>
 
-<div>
+<div class="containerBase">
+<div class="box1">
+
 <h2>Liste de patients :</h2>
+<hr>
+
 <c:forEach items = "${patientList}" var="patient">
 
-    Nom du patient : ${patient.getLastName()}
+    <strong>Nom du patient :</strong> ${patient.getLastName()}
     <a href="redirection-servlet?id=${patient.getId()}">  ->  Détails</a><br>
 
 </c:forEach>
+<hr>
 
 </div>
-<h2>Ajouter un patient :</h2>
-<div>
+
+
+
+<div class="box2">
+
+    <h2>Ajouter un patient :</h2>
+    <hr>
+
     <form action="redirection-servlet" method="post">
-        <div><label>Lastname :</label><input type="text" name="lastname" /></div>
-        <div><label>Firstname :</label><input type="text" name="firstname" /></div>
-        <div><label>Email :</label><input type="text" name="email" /></div>
-        <div><label>Tel :</label><input type="text" name="tel" /></div>
-        <div><button type="submit" >Submit</button></div>
+
+        <div><label for="lastname">Lastname :</label><input type="text" name="lastname" id="lastname" /></div>
+        <div><label for="firstname">Firstname :</label><input type="text" name="firstname" id="firstname"/></div>
+        <div><label for="email">Email :</label><input type="text" name="email" id="email" /></div>
+        <div><label for="tel">Tel :</label><input type="text" name="tel" id="tel"/></div>
+        <div class="btn"><button type="submit" >Submit</button></div>
+
     </form>
+    <hr>
+
 </div>
+
+</div>
+
 </body>
 </html>

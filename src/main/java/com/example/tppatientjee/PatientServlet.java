@@ -18,7 +18,7 @@ import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
 
-@WebServlet(name = "patient", value="/patient")
+@WebServlet(name = "patient", value="/")
 public class PatientServlet extends HttpServlet {
 
     private static PatientService patientService;

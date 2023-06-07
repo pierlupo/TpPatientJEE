@@ -74,6 +74,19 @@ public class PatientService extends BaseService implements Repository<Patient> {
         return patientList;
     }
 
+    public Patient findBylastName(List<String> lastNames)throws Exception {
+        if (lastNames.size() > 0) {
+            session = sessionFactory.openSession();
+            Query<Patient> patientQuery = session.createQuery("from Patient where lastName in :lastNames");
+            patientQuery.setParameter("lastNames", lastNames);
+            List<Patient> patientList = patientQuery.list();
+            session.getTransaction().commit();
+            session.close();
+            return (Patient) patientList;
+        }
+        throw new Exception("error");
+    }
+
     public void begin(){
 
         session = sessionFactory.openSession();

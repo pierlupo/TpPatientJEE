@@ -9,15 +9,23 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-  <title>Détails des Patients ${patient.getId()}</title>
+  <title>Détails du Patient ${patient.getId()}</title>
   <jsp:include page="../includes/head.jsp" />
 </head>
 <body>
-<jsp:include page="../includes/header.jsp" />
+<a href="redirection-servlet"><jsp:include page="../includes/header.jsp" /></a>
+<div class="containerBase">
+ <div class="box1">
+<h2>Détails du patient :</h2>
+     <strong>Nom :</strong> ${patient.getLastName()}, <strong>Prénom :</strong> ${patient.getFirstName()}, <strong>Email :</strong> ${patient.getEmail()}, <strong>Tel :</strong> ${patient.getTel()}
+ </div>
+ <div class="box2">
+<h2>Liste de consultations :</h2>
+    ${patient.getConsultations()}
+    <a href="redirection-servlet?id=${patient.getId()}">  ->  Détails</a><br>
+ </div>
 
-<div>
-<h2>Détails des patients :</h2>
-    Nom : ${patient.getLastName()}, Prénom : ${patient.getFirstName()}, Email : ${patient.getEmail()}, Tel : ${patient.getTel()}
 </div>
+
 </body>
 </html>

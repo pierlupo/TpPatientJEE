@@ -3,20 +3,29 @@ body {
    font-family: Carlito;
 }
 
-h2, div {
+.containerBase {
+    display: flex;
+    flex-direction: row;
     margin-left: auto;
     margin-right: auto;
-    width: 300px;
+    width: 80rem;
+}
+
+h2{
+    /*margin-left: auto;*/
+    /*margin-right: auto;*/
+    /*width: 300px;*/
     text-align: center;
     text-transform: uppercase;
 }
+
 label {
     display: inline-block;
-    width: 100px;
+    width: 150px;
     text-transform: uppercase;
 }
+
 input {
-    display: inline-block;
     border: none;
     border-radius: 10px;
     margin-left: auto;
@@ -31,7 +40,7 @@ a {
     cursor:pointer;
 }
 
-button {
+button{
     text-align: center;
     border:none;
     border-radius: 10px;
@@ -40,4 +49,51 @@ button {
     height: 25px;
     background-color: burlywood;
     text-transform: uppercase;
+    margin-left: auto;
+    margin-right: auto;
 }
+
+.box1, .box2{
+    width: 30rem;
+    padding: 2rem;
+}
+
+.search{
+    margin-left: auto;
+    margin-right: auto;
+    width: 300px;
+    padding: 20px;
+}
+
+.btnSearch{
+    text-align: center;
+    border:none;
+    border-radius: 10px;
+    cursor:pointer;
+    width: 100px;
+    height: 25px;
+    background-color: burlywood;
+    text-transform: uppercase;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/*.dataTable {*/
+/*    border: 1px solid black;*/
+/*    border-spacing : 1px;*/
+/*    border-collapse : collapse;*/
+/*    margin: auto;*/
+/*    width: 60%;*/
+/*}*/
+
+/*.dataTable thead {*/
+/*    background: #888a85;*/
+/*}*/
+
+/*.dataTable .even {*/
+/*    background: #eeeeec;*/
+/*}*/
+
+/*.dataTable .odd {*/
+/*    background: #d3d7cf;*/
+/*}*/

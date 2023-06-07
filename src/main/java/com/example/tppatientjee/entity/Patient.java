@@ -21,7 +21,7 @@ public class Patient {
 
     private String tel;
 
-    @OneToMany(mappedBy = "patient")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "patient")
     private List<Consultation> consultations;
 
     @OneToMany(mappedBy = "patient")

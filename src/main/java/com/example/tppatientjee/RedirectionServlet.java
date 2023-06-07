@@ -19,9 +19,11 @@ import java.util.List;
 public class RedirectionServlet extends HttpServlet {
 
     private static PatientService patientService;
+
     public void init() {
         patientService = new PatientService();
     }
+
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         if (request.getParameter("id") != null) {
             int id = Integer.parseInt(request.getParameter("id"));
