@@ -7,5 +7,6 @@
         <mapping class="com.example.tppatientjee.entity.Patient"/>
         <mapping class="com.example.tppatientjee.entity.Consultation"/>
         <mapping class="com.example.tppatientjee.entity.Prescription"/>
+        <mapping class="com.example.tppatientjee.entity.FicheSoins"/>
     </session-factory>
 </hibernate-configuration>

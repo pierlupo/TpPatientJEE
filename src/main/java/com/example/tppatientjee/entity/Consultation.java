@@ -11,29 +11,27 @@ public class Consultation {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    private String content;
-
     @Temporal(TemporalType.DATE)
-    private Date date;
+    private Date dateConsultation;
 
     @ManyToOne
     @JoinColumn(name="patient_id")
     private Patient patient;
 
-    public Patient getPatient() {
-        return patient;
-    }
+    @OneToOne(mappedBy = "consultation", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private Prescription prescription;
 
-    public void setPatient(Patient patient) {
-        this.patient = patient;
-    }
+    @OneToOne(mappedBy = "consultation", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private FicheSoins ficheSoins;
 
     public Consultation() {
     }
 
-    public Consultation(String content, Date date) {
-        this.content = content;
-        this.date = date;
+    public Consultation(Date dateConsultation, Patient patient, Prescription prescription, FicheSoins ficheSoins) {
+        this.dateConsultation = dateConsultation;
+        this.patient = patient;
+        this.prescription = prescription;
+        this.ficheSoins = ficheSoins;
     }
 
     public int getId() {
@@ -44,28 +42,46 @@ public class Consultation {
         this.id = id;
     }
 
-    public String getContent() {
-        return content;
+    public Date getDateConsultation() {
+        return dateConsultation;
     }
 
-    public void setContent(String content) {
-        this.content = content;
+    public void setDateConsultation(Date dateConsultation) {
+        this.dateConsultation = dateConsultation;
     }
 
-    public Date getDate() {
-        return date;
+    public Patient getPatient() {
+        return patient;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setPatient(Patient patient) {
+        this.patient = patient;
+    }
+
+    public Prescription getPrescription() {
+        return prescription;
+    }
+
+    public void setPrescription(Prescription prescription) {
+        this.prescription = prescription;
+    }
+
+    public FicheSoins getFicheSoins() {
+        return ficheSoins;
+    }
+
+    public void setFicheSoins(FicheSoins ficheSoins) {
+        this.ficheSoins = ficheSoins;
     }
 
     @Override
     public String toString() {
-        return "Comment{" +
+        return "Consultation{" +
                 "id=" + id +
-                ", content='" + content + '\'' +
-                ", date=" + date +
+                ", dateConsultation=" + dateConsultation +
+                ", patient=" + patient +
+                ", prescription=" + prescription +
+                ", ficheSoins=" + ficheSoins +
                 '}';
     }
 }
