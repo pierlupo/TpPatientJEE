@@ -13,7 +13,7 @@
     <jsp:include page="../includes/head.jsp" />
 </head>
 <body>
-<a href="patientlist"><jsp:include page="../includes/header.jsp" /><a>
+<jsp:include page="../includes/header.jsp" />
 
 <div class="containerBase">
 <div class="box1">
@@ -24,7 +24,7 @@
 <c:forEach items = "${patientList}" var="patient">
 
     <strong>Nom du patient :</strong> ${patient.getLastName()}
-    <a href="redirection-servlet?id=${patient.getId()}">  ->  Détails</a><br>
+    <a href="/TpPatientJEE_war_exploded/?id=${patient.getId()}">  ->  Détails</a><br>
 
 </c:forEach>
 <hr>
@@ -38,12 +38,13 @@
     <h2>Ajouter un patient :</h2>
     <hr>
 
-    <form action="redirection-servlet" method="post">
+    <form method="post" enctype="multipart/form-data">
 
         <div><label for="lastname">Lastname :</label><input type="text" name="lastname" id="lastname" /></div>
         <div><label for="firstname">Firstname :</label><input type="text" name="firstname" id="firstname"/></div>
         <div><label for="email">Email :</label><input type="text" name="email" id="email" /></div>
         <div><label for="tel">Tel :</label><input type="text" name="tel" id="tel"/></div>
+        <div><label for="image">Upload :</label><input type="file" name="image" id="image"/></div>
         <div class="btn"><button type="submit" >Submit</button></div>
 
     </form>

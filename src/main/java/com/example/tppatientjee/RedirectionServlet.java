@@ -29,11 +29,11 @@ public class RedirectionServlet extends HttpServlet {
             int id = Integer.parseInt(request.getParameter("id"));
             Patient patient = patientService.findById(id);
             request.setAttribute("patient", patient);
-            request.getRequestDispatcher(Definition.VIEW_PATH+"redirection2.jsp").forward(request, response);
+            request.getRequestDispatcher(Definition.VIEW_PATH+"patientDetail.jsp").forward(request, response);
         } else {
             List<Patient> patientList = patientService.findAll();
             request.setAttribute("patientList", patientList);
-            request.getRequestDispatcher(Definition.VIEW_PATH+"redirection.jsp").forward(request, response);
+            request.getRequestDispatcher(Definition.VIEW_PATH+"patient.jsp").forward(request, response);
         }
     }
 

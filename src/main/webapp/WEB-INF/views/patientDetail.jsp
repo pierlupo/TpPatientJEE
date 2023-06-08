@@ -13,16 +13,21 @@
   <jsp:include page="../includes/head.jsp" />
 </head>
 <body>
-<a href="redirection-servlet"><jsp:include page="../includes/header.jsp" /></a>
+<a href="${pageContext.request.contextPath}/"><jsp:include page="../includes/header.jsp" /></a>
 <div class="containerBase">
  <div class="box1">
 <h2>Détails du patient :</h2>
-     <strong>Nom :</strong> ${patient.getLastName()}, <strong>Prénom :</strong> ${patient.getFirstName()}, <strong>Email :</strong> ${patient.getEmail()}, <strong>Tel :</strong> ${patient.getTel()}
+     <hr>
+     <strong>Nom :</strong> ${patient.getLastName()}<br>
+     <strong>Prénom :</strong> ${patient.getFirstName()}<br>
+     <strong>Email :</strong> ${patient.getEmail()}<br>
+     <strong>Tel :</strong> ${patient.getTel()}<br>
+     <hr>
  </div>
  <div class="box2">
 <h2>Liste de consultations :</h2>
     ${patient.getConsultations()}
-    <a href="redirection-servlet?id=${patient.getId()}">  ->  Détails</a><br>
+    <a href="${pageContext.request.contextPath}/?id=${patient.getId()}">  ->  Détails</a><br>
  </div>
 
 </div>

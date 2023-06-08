@@ -24,7 +24,8 @@ public class Patient {
 
     private String tel;
 
-
+//    @OneToMany(mappedBy = "patient", fetch = FetchType.EAGER)
+//    List<Image> images;
 
     @OneToMany(mappedBy = "patient", fetch = FetchType.EAGER)
     List<Consultation> consultations;

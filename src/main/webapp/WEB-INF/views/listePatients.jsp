@@ -13,13 +13,12 @@
     <jsp:include page="../includes/head.jsp" />
 </head>
 <body>
-<a href="redirection-servlet"><jsp:include page="../includes/header.jsp" /></a>
+<a href="${pageContext.request.contextPath}/"><jsp:include page="../includes/header.jsp" /></a>
 <div class="containerBase">
     <div class="box1">
         <h2>Liste de patients :</h2>
         <hr>
     <c:forEach items = "${patientList}" var="p">
-
         <strong>Nom du patient :</strong> ${p.getLastName()}<br>
         <strong>Prénom :</strong> ${p.getFirstName()}<br>
         <strong>Email :</strong> ${p.getEmail()}<br>
