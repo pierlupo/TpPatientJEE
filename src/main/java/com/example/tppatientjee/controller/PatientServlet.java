@@ -1,7 +1,7 @@
 package com.example.tppatientjee.controller;
 
 import com.example.tppatientjee.entity.Patient;
-import com.example.tppatientjee.service.PatientService;
+import com.example.tppatientjee.service.PatientService0;
 import com.example.tppatientjee.service.UploadService;
 import com.example.tppatientjee.util.Definition;
 import jakarta.servlet.ServletException;
@@ -14,12 +14,6 @@ import jakarta.servlet.http.Part;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.util.Date;
 import java.util.List;
 
 
@@ -30,21 +24,21 @@ import java.util.List;
         maxRequestSize = 1024*1024*100)
 public class PatientServlet extends HttpServlet {
 
-    private static PatientService patientService;
+    private static PatientService0 patientService0;
     private UploadService uploadService;
     public void init() {
-        patientService = new PatientService();
+        patientService0 = new PatientService0();
 //        uploadService = new UploadService(getServletContext());
     }
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         if (request.getParameter("id") != null) {
             int id = Integer.parseInt(request.getParameter("id"));
-            Patient patient = patientService.findById(id);
+            Patient patient = patientService0.findById(id);
             request.setAttribute("patient", patient);
             request.getRequestDispatcher(Definition.VIEW_PATH+"patientDetail.jsp").forward(request, response);
         } else {
-            List<Patient> patientList = patientService.findAll();
+            List<Patient> patientList = patientService0.findAll();
             request.setAttribute("patientList", patientList);
             request.getRequestDispatcher(Definition.VIEW_PATH+"patient.jsp").forward(request, response);
         }
@@ -80,7 +74,7 @@ public class PatientServlet extends HttpServlet {
 //                String name = part.getSubmittedFileName();
 //                part.write(uploadPath + File.separator + name);
 //            }
-            if(patientService.create(patient)) {
+            if(patientService0.create(patient)) {
                 response.sendRedirect("patient");
             }
         }

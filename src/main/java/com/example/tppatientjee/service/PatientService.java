@@ -1,100 +1,73 @@
 package com.example.tppatientjee.service;
 
-
-import com.example.tppatientjee._interface.Repository;
-import com.example.tppatientjee.entity.Consultation;
-import com.example.tppatientjee.entity.Patient;
-import com.example.tppatientjee.entity.Prescription;
-import org.hibernate.query.Query;
-
-import java.util.Date;
 import java.util.List;
 
-public class PatientService extends BaseService implements Repository<Patient> {
+import com.example.tppatientjee.Repository.PatientRepository;
+import com.example.tppatientjee.entity.Patient;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 
-    public PatientService(){
-        super();
-    }
-    @Override
-    public boolean create(Patient element) {
-        session = sessionFactory.openSession();
-        session.getTransaction().begin();
-        session.save(element);
-        session.getTransaction().commit();
-        return true;
-    }
-    public boolean create(Consultation element) {
-        session = sessionFactory.openSession();
-        session.getTransaction().begin();
-        session.save(element);
-        session.getTransaction().commit();
-        return true;
-    }
-    public boolean create(Prescription element) {
-        session = sessionFactory.openSession();
-        session.getTransaction().begin();
-        session.save(element);
-        session.getTransaction().commit();
-        return true;
-    }
+public class PatientService {
 
-    @Override
-    public boolean update(Patient element) {
-        session = sessionFactory.openSession();
-        session.getTransaction().begin();
-        session.update(element);
-        session.getTransaction().commit();
-        return true;
-    }
+        private SessionFactory _sessionFactory;
+        private PatientRepository patientRepository;
+        private Session session;
 
-    @Override
-    public boolean delete(Patient element) {
-        session = sessionFactory.openSession();
-        session.getTransaction().begin();
-        session.delete(element);
-        session.getTransaction().commit();
-        return true;
-    }
-
-    @Override
-    public Patient findById(int id) {
-        Patient patient = null;
-        session = sessionFactory.openSession();
-        patient = (Patient) session.get(Patient.class, id);
-        session.close();
-        return patient;
-    }
-
-    public List<Patient> findAll(){
-        List<Patient> patientList = null;
-        session = sessionFactory.openSession();
-        Query<Patient> productQuery = session.createQuery("from Patient");
-        patientList = productQuery.list();
-        session.close();
-        return patientList;
-    }
-
-    public Patient findBylastName(List<String> lastNames)throws Exception {
-        if (lastNames.size() > 0) {
-            session = sessionFactory.openSession();
-            Query<Patient> patientQuery = session.createQuery("from Patient where lastName in :lastNames");
-            patientQuery.setParameter("lastNames", lastNames);
-            List<Patient> patientList = patientQuery.list();
-            session.getTransaction().commit();
-            session.close();
-            return (Patient) patientList;
+        public PatientService (SessionFactory sessionFactory){
+            _sessionFactory = sessionFactory;
         }
-        throw new Exception("error");
+
+        public boolean createPatient (String lastName, String firstName, String email, String tel){
+            boolean result = false;
+            session = _sessionFactory.openSession();
+            session.beginTransaction();
+            patientRepository = new PatientRepository(session);
+            Patient patient = Patient.builder().lastName(lastName).firstName(firstName).email(email).tel(tel).build();
+            try{
+                patientRepository.create(patient);
+                session.getTransaction().commit();
+                result = true;
+            }catch (Exception e){
+                try{
+                    session.getTransaction().rollback();
+                }catch (Exception except){
+                    System.out.println(except.getMessage());
+                }
+            }finally {
+                session.close();
+            }
+            return result;
+        }
+
+        public Patient getByIdPatient (int id){
+            Patient patient = null ;
+            session = _sessionFactory.openSession();
+            patientRepository = new PatientRepository(session);
+            try{
+                patient = patientRepository.findById(id);
+            }catch (Exception e){
+
+            }finally {
+                session.close();
+            }
+            return patient;
+        }
+
+        public List<Patient> getPatients(String name){
+            List<Patient> patients = null;
+            session = _sessionFactory.openSession();
+            patientRepository = new PatientRepository(session);
+            try{
+                if(name == null){
+                    patients = patientRepository.findAll();
+                }else{
+                    patients = patientRepository.findAllByName(name);
+                }
+            }catch (Exception e){
+
+            }finally {
+                session.close();
+            }
+            return patients;
+        }
     }
-
-    public void begin(){
-
-        session = sessionFactory.openSession();
-
-    }
-
-    public void end(){
-        //session.close();
-        sessionFactory.close();
-    }
-}

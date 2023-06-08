@@ -2,26 +2,21 @@ package com.example.tppatientjee.controller;
 
 
 
-import com.example.tppatientjee.entity.Consultation;
-import com.example.tppatientjee.entity.Prescription;
 import com.example.tppatientjee.entity.Patient;
-import com.example.tppatientjee.service.PatientService;
+import com.example.tppatientjee.service.PatientService0;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
 public class IHM {
 
-    private static PatientService patientService;
+    private static PatientService0 patientService0;
     private static Scanner scanner;
 
     public IHM() {
         scanner = new Scanner(System.in);
-        patientService = new PatientService();
+        patientService0 = new PatientService0();
     }
 
 
@@ -38,7 +33,7 @@ public class IHM {
                 case "5" -> deletePatientById();
             }
         } while (!choice.equals("0"));
-        patientService.end();
+        patientService0.end();
     }
 
     private void menu() {
@@ -65,14 +60,14 @@ public class IHM {
         String email = scanner.nextLine();
         System.out.println("Please enter the patient's tel : ");
         String tel = scanner.nextLine();
-        patientService.create(new Patient(lastname,firstname,email,tel));
+        patientService0.create(new Patient(lastname,firstname,email,tel));
     }
 
     private void updatePatient(){
         System.out.println("Please enter the id : ");
         int id = scanner.nextInt();
         scanner.nextLine();
-        Patient p = patientService.findById(id);
+        Patient p = patientService0.findById(id);
         System.out.println("Please enter the lastname : ");
         String lastname = scanner.nextLine();
         p.setLastName(lastname);
@@ -85,7 +80,7 @@ public class IHM {
         System.out.println("Please enter the tel : ");
         String tel = scanner.nextLine();
         p.setTel(tel);
-        patientService.update(p);
+        patientService0.update(p);
 
     }
 
@@ -93,7 +88,7 @@ public class IHM {
         System.out.println("Please enter the id : ");
         int id = scanner.nextInt();
         scanner.nextLine();
-        Patient p = patientService.findById(id);
+        Patient p = patientService0.findById(id);
         System.out.println(p);
     }
 
@@ -101,7 +96,7 @@ public class IHM {
        System.out.println("###################");
        System.out.println("List of patients : ");
        System.out.println("###################");
-           List<Patient> patients = patientService.findAll();
+           List<Patient> patients = patientService0.findAll();
         for (Patient pa: patients) {
             System.out.println(pa);
         }
@@ -111,8 +106,8 @@ public class IHM {
         System.out.println("Please enter the id : ");
         int id = scanner.nextInt();
         scanner.nextLine();
-        Patient p = patientService.findById(id);
-        patientService.delete(p);
+        Patient p = patientService0.findById(id);
+        patientService0.delete(p);
     }
 
 
