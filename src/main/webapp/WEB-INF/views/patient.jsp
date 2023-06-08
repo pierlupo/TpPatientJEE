@@ -14,7 +14,6 @@
 </head>
 <body>
 <jsp:include page="../includes/header.jsp" />
-
 <div class="containerBase">
 <div class="box1">
 
@@ -24,7 +23,7 @@
 <c:forEach items = "${patientList}" var="patient">
 
     <strong>Nom du patient :</strong> ${patient.getLastName()}
-    <a href="/TpPatientJEE_war_exploded/?id=${patient.getId()}">  ->  Détails</a><br>
+    <a href="${pageContext.request.contextPath}/?id=${patient.getId()}">  ->  Détails</a><br>
 
 </c:forEach>
 <hr>
@@ -38,7 +37,7 @@
     <h2>Ajouter un patient :</h2>
     <hr>
 
-    <form method="post" enctype="multipart/form-data">
+    <form action="" method="post" enctype="multipart/form-data">
 
         <div><label for="lastname">Lastname :</label><input type="text" name="lastname" id="lastname" /></div>
         <div><label for="firstname">Firstname :</label><input type="text" name="firstname" id="firstname"/></div>

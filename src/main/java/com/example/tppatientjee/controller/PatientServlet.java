@@ -1,4 +1,4 @@
-package com.example.tppatientjee;
+package com.example.tppatientjee.controller;
 
 import com.example.tppatientjee.entity.Patient;
 import com.example.tppatientjee.service.PatientService;
@@ -23,7 +23,7 @@ import java.util.Date;
 import java.util.List;
 
 
-@WebServlet(name = "patient", value="/")
+@WebServlet(name="patient", value="")
 @MultipartConfig( //taille max d'un fichier (10 méga)
         maxFileSize = 1024*1024*10,
         //taille max d'une requete (100 méga)

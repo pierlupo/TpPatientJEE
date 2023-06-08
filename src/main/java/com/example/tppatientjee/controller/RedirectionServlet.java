@@ -1,4 +1,4 @@
-package com.example.tppatientjee;
+package com.example.tppatientjee.controller;
 
 import com.example.tppatientjee.entity.Patient;
 import com.example.tppatientjee.service.PatientService;

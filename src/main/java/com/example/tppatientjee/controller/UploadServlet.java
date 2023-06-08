@@ -1,4 +1,4 @@
-package com.example.tppatientjee;
+package com.example.tppatientjee.controller;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;

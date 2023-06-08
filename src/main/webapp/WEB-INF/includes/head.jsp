@@ -8,3 +8,6 @@
 <style>
   <%@include file="../css/style.css"%>
 </style>
+<script>
+    <%@include file="../js/script.js"%>
+</script>

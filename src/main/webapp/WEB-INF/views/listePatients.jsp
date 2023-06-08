@@ -13,7 +13,9 @@
     <jsp:include page="../includes/head.jsp" />
 </head>
 <body>
-<a href="${pageContext.request.contextPath}/"><jsp:include page="../includes/header.jsp" /></a>
+<%--<a href="${pageContext.request.contextPath}/">--%>
+    <jsp:include page="../includes/header.jsp" />
+<%--</a>--%>
 <div class="containerBase">
     <div class="box1">
         <h2>Liste de patients :</h2>
