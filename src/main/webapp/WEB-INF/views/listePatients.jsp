@@ -29,15 +29,23 @@
     </c:forEach>
     </div>
     <div class="box2">
-
-        <h2>Rechercher un patient :</h2>
-        <hr>
-
-        <form action="patientlist" method="post">
-
-        <div class="search"><label for="search">Recherche :</label><input type="search" name="search" id="search"  placeholder="Entrer un nom…"/></div>
-        <div class="btnSearch"><button type="submit" >Submit</button></div>
-        </form>
+        <div>
+            <h2>Ajouter une consultation</h2>
+            <form action="/consultation" method="post">
+                <input type="hidden" name="patientId" value="${patient.getId()}">
+                <div>
+                    <button type="submit">Valider</button>
+                </div>
+            </form>
+        </div>
+        <h2>Liste des consultations</h2>
+        <c:forEach items="${patient.getConsultations()}" var="consultation">
+            <div>
+                id : ${consultation.getId()}
+                date : ${consultation.getdateConsultation()}
+                <a href="${pageContext.request.contextPath}/consultation?id=${consultation.getId()}">Détails de la consultation</a>
+            </div>
+        </c:forEach>
         <hr>
 
     </div>

@@ -16,4 +16,14 @@ public class Image {
 
     @ManyToOne()
     private Patient patient;
+
+    public Image(){
+
+    }
+
+    public Image(int id, String uri, Patient patient) {
+        this.id = id;
+        this.uri = uri;
+        this.patient = patient;
+    }
 }

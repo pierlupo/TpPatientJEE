@@ -1,9 +1,12 @@
 package com.example.tppatientjee.entity;
 
+import lombok.Builder;
+
 import javax.persistence.*;
 import java.util.Date;
 
 @Entity
+@Builder
 @Table(name = "consultation")
 public class Consultation {
 
@@ -28,6 +31,14 @@ public class Consultation {
     }
 
     public Consultation(Date dateConsultation, Patient patient, Prescription prescription, FicheSoins ficheSoins) {
+        this.dateConsultation = dateConsultation;
+        this.patient = patient;
+        this.prescription = prescription;
+        this.ficheSoins = ficheSoins;
+    }
+
+    public Consultation(int id, Date dateConsultation, Patient patient, Prescription prescription, FicheSoins ficheSoins) {
+        this.id = id;
         this.dateConsultation = dateConsultation;
         this.patient = patient;
         this.prescription = prescription;

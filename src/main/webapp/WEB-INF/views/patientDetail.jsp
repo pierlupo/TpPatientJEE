@@ -29,7 +29,7 @@
  <div class="box2">
 <h2>Liste de consultations :</h2>
     ${patient.getConsultations()}
-    <a href="${pageContext.request.contextPath}/?id=${patient.getId()}">  ->  Détails</a><br>
+    <a href="${pageContext.request.contextPath}/consultation?id=${patient.getId()}">  ->  Détails de la consultation</a><br>
  </div>
 
 </div>

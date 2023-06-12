@@ -1,86 +1,81 @@
 package com.example.tppatientjee.controller;
 
 import com.example.tppatientjee.entity.Patient;
-import com.example.tppatientjee.service.PatientService0;
-import com.example.tppatientjee.service.UploadService;
+import com.example.tppatientjee.service.*;
 import com.example.tppatientjee.util.Definition;
+import com.example.tppatientjee.util.HibernateSession;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.Part;
+import org.hibernate.Session;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
+import static com.example.tppatientjee.util.Definition.VIEW_PATH;
 
-@WebServlet(name="patient", value="")
-@MultipartConfig( //taille max d'un fichier (10 méga)
-        maxFileSize = 1024*1024*10,
-        //taille max d'une requete (100 méga)
-        maxRequestSize = 1024*1024*100)
+
+@WebServlet(name = "patient", value = "")
 public class PatientServlet extends HttpServlet {
-
-    private static PatientService0 patientService0;
-    private UploadService uploadService;
+    private PatientService patientService;
+    private List<Patient> patients;
+    private LoginService loginService;
     public void init() {
-        patientService0 = new PatientService0();
-//        uploadService = new UploadService(getServletContext());
-    }
+        patientService = new PatientService(HibernateSession.getSessionFactory());
 
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        if (request.getParameter("id") != null) {
-            int id = Integer.parseInt(request.getParameter("id"));
-            Patient patient = patientService0.findById(id);
-            request.setAttribute("patient", patient);
-            request.getRequestDispatcher(Definition.VIEW_PATH+"patientDetail.jsp").forward(request, response);
-        } else {
-            List<Patient> patientList = patientService0.findAll();
-            request.setAttribute("patientList", patientList);
-            request.getRequestDispatcher(Definition.VIEW_PATH+"patient.jsp").forward(request, response);
-        }
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        if(request.getParameter("lastname") != null) {
-            String lastname = request.getParameter("lastname");
-            String firstname = request.getParameter("firstname");
-            String email = request.getParameter("email");
-            String tel = request.getParameter("tel");
-            Patient patient = new Patient(lastname, firstname, email, tel);
 
-            //Le fichier envoyé par le client
-            Part image = request.getPart("image");
-            //On peut récupérer le nom du fichier par exemple
-            String fileName = image.getSubmittedFileName();
-            //Le dossier où sera envoyé le fichier getServletContext => permet de récupérer le dossier où est déployé des servlet
-            String uploadPath =  getServletContext().getRealPath("/") + "images";
-
-
-            //Créé le dossier d'upload si il n'existe pas
-            File uploadDir = new File(uploadPath);
-            if(!uploadDir.exists()) {
-                uploadDir.mkdir();
-            }
-
-            //On crée notre fichier dans le dossier upload à partir du fichier récupéré
-            image.write(uploadPath + File.separator + fileName);
-
-            //SI un envoi multiple
-//            for(Part part : request.getParts()) {
-//                String name = part.getSubmittedFileName();
-//                part.write(uploadPath + File.separator + name);
-//            }
-            if(patientService0.create(patient)) {
-                response.sendRedirect("patient");
+        String messageError = null;
+        if(request.getParameter("action")!= null && request.getParameter("action").equals("search")) {
+            patients = patientService.getPatients(request.getParameter("search"));
+        }
+        else {
+            patients = patientService.getPatients(null);
+            if(request.getParameter("lastName") != null
+                && request.getParameter("firstName") != null
+                && request.getParameter("email") != null
+                && request.getParameter("tel") != null
+                && !request.getParameter("lastName").equals("")
+                && !request.getParameter("firstName").equals("")
+                && !request.getParameter("email").equals("")
+                && !request.getParameter("tel").equals("")){
+                String lastName= request.getParameter("lastName");
+                String firstName = request.getParameter("firstName");
+                String email = request.getParameter("email");
+                String tel = request.getParameter("tel");
+                if(patientService.createPatient(lastName, firstName, email, tel)) {
+                    response.sendRedirect("");
+                }else {
+                    messageError = "Error while adding a patient";
+                }
+            } else {
+                messageError = "fill up all fields please";
             }
         }
+        if(messageError != null || request.getParameter("action").equals("search")) {
+            request.setAttribute("patientList", patients);
+            request.setAttribute("messageError", messageError);
+            request.getRequestDispatcher(VIEW_PATH + "/patient.jsp").forward(request, response);
+        }
     }
-    public void destroy(){
+
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        loginService = new LoginImpl(request.getSession());
+        request.setAttribute("isLogged", loginService.isLogged());
+        if (request.getParameter("id") != null) {
+            int id = Integer.parseInt(request.getParameter("id"));
+            Patient patient = patientService.getByIdPatient(id);
+            request.setAttribute("patient", patient);
+            request.getRequestDispatcher(Definition.VIEW_PATH+"patientDetail.jsp").forward(request, response);
+        }else {
+        patients = patientService.getPatients(null);
+        request.setAttribute("patientList", patients);
+        request.getRequestDispatcher(VIEW_PATH + "/patient.jsp").forward(request, response);
+    }
 
     }
 }
-

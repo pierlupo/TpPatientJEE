@@ -34,9 +34,19 @@
 
 <div class="box2">
 
-    <h2>Ajouter un patient :</h2>
+    <h2>Rechercher un patient :</h2>
     <hr>
 
+    <form action="" method="post">
+        <input type="hidden" name="action" value="search">
+        <div class="search"><label for="search">Recherche :</label><input type="search" name="search" id="search"  placeholder="Enter a name…"/></div>
+        <div class="btnSearch"><button type="submit" >Submit</button></div>
+    </form>
+    <hr>
+
+    <h2>Ajouter un patient :</h2>
+    <hr>
+    <c:if test="${isLogged == true}">
     <form action="" method="post" enctype="multipart/form-data">
 
         <div><label for="lastname">Lastname :</label><input type="text" name="lastname" id="lastname" /></div>
@@ -45,8 +55,8 @@
         <div><label for="tel">Tel :</label><input type="text" name="tel" id="tel"/></div>
         <div><label for="image">Upload :</label><input type="file" name="image" id="image"/></div>
         <div class="btn"><button type="submit" >Submit</button></div>
-
     </form>
+    </c:if>
     <hr>
 
 </div>

@@ -1,9 +1,15 @@
 package com.example.tppatientjee.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import java.util.Date;
 
 @Entity
+@AllArgsConstructor
+@Builder
 @Table(name = "prescription")
 public class Prescription {
 
@@ -11,7 +17,7 @@ public class Prescription {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    private String medicine;
+    private String content;
 
     @Temporal(TemporalType.DATE)
     private Date date;
@@ -30,12 +36,12 @@ public class Prescription {
         this.id = id;
     }
 
-    public String getMedicine() {
-        return medicine;
+    public String getContent() {
+        return content;
     }
 
-    public void setMedicine(String medicine) {
-        this.medicine = medicine;
+    public void setMedicine(String content) {
+        this.content = content;
     }
 
     public Date getDate() {
@@ -58,7 +64,7 @@ public class Prescription {
     public String toString() {
         return "Prescription{" +
                 "id=" + id +
-                ", medicine='" + medicine + '\'' +
+                ", content='" + content + '\'' +
                 ", date=" + date +
                 ", consultation=" + consultation +
                 '}';

@@ -1,8 +1,10 @@
 package com.example.tppatientjee.entity;
 
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.List;
@@ -11,7 +13,6 @@ import java.util.List;
 @Entity
 @Data
 @Builder
-@Table(name="patient")
 public class Patient {
 
     @Id
@@ -31,8 +32,19 @@ public class Patient {
 
     @OneToMany(mappedBy = "patient", fetch = FetchType.EAGER)
     List<Consultation> consultations;
+
     public Patient(){
 
+    }
+
+    public Patient(int id, String lastName, String firstName, String email, String tel, List<Image> images, List<Consultation> consultations) {
+        this.id = id;
+        this.lastName = lastName;
+        this.firstName = firstName;
+        this.email = email;
+        this.tel = tel;
+        //this.images = images;
+        this.consultations = consultations;
     }
 
     public Patient(String lastName, String firstName, String email, String tel, List<Consultation> consultations) {
