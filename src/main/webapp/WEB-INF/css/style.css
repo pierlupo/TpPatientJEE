@@ -80,7 +80,18 @@ button{
     margin-left: auto;
     margin-right: auto;
 }
-
+#ajouter{
+    text-align: center;
+    border:none;
+    border-radius: 10px;
+    cursor:pointer;
+    width: 100px;
+    height: 25px;
+    background-color: var(--cambridgeblue);
+    text-transform: uppercase;
+    margin-left: auto;
+    margin-right: auto;
+}
 .box1, .box2, .box3{
     width: 30rem;
     padding: 2rem;
