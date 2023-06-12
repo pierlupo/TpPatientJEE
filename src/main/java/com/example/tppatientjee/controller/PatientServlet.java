@@ -9,8 +9,6 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.hibernate.Session;
-
 import java.io.IOException;
 import java.util.List;
 
@@ -22,9 +20,9 @@ public class PatientServlet extends HttpServlet {
     private PatientService patientService;
     private List<Patient> patients;
     private LoginService loginService;
+
     public void init() {
         patientService = new PatientService(HibernateSession.getSessionFactory());
-
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
@@ -43,11 +41,11 @@ public class PatientServlet extends HttpServlet {
                 && !request.getParameter("firstname").equals("")
                 && !request.getParameter("email").equals("")
                 && !request.getParameter("tel").equals("")){
-                String lastName= request.getParameter("lastname");
-                String firstName = request.getParameter("firstname");
+                String lastname= request.getParameter("lastname");
+                String firstname = request.getParameter("firstname");
                 String email = request.getParameter("email");
                 String tel = request.getParameter("tel");
-                if(patientService.createPatient(lastName, firstName, email, tel)) {
+                if(patientService.createPatient(lastname, firstname, email, tel)) {
                     response.sendRedirect("");
                 }else {
                     messageError = "Error while adding a patient";

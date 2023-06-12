@@ -37,25 +37,25 @@
     <h2>Rechercher un patient :</h2>
     <hr>
 
-    <form action="" method="post">
-        <input type="hidden" name="action" value="search">
-        <div class="search"><label for="search">Recherche :</label><input type="search" name="search" id="search"  placeholder="Enter a name…"/></div>
-        <div class="btnSearch"><button type="submit" >Submit</button></div>
-    </form>
+<%--    <form action="" method="post">--%>
+<%--        <input type="hidden" name="action" value="search">--%>
+<%--        <div class="search"><label for="search">Recherche :</label><input type="search" name="search" id="search"  placeholder="Enter a name…"/></div>--%>
+<%--        <div class="btnSearch"><button type="submit" name="research">Rechercher</button></div>--%>
+<%--    </form>--%>
     <hr>
 </div>
     <div class="box2">
     <h2>Ajouter un patient :</h2>
     <hr>
     <c:if test="${isLogged == true}">
-    <form action="" method="post" enctype="multipart/form-data">
-
+    <form  method="post" >
+        <input type="hidden" name="test" />
         <div><label for="lastname">Lastname :</label><input type="text" name="lastname" id="lastname" /></div>
         <div><label for="firstname">Firstname :</label><input type="text" name="firstname" id="firstname"/></div>
         <div><label for="email">Email :</label><input type="text" name="email" id="email" /></div>
         <div><label for="tel">Tel :</label><input type="text" name="tel" id="tel"/></div>
-        <div><label for="image">Upload :</label><input type="file" name="image" id="image"/></div>
-        <div class="btn"><button type="submit" >Submit</button></div>
+<%--        <div><label for="image">Upload :</label><input type="file" name="image" id="image"/></div>--%>
+        <div class="btn"><button type="submit" name="ajouter" >Ajouter</button></div>
     </form>
     </c:if>
     <hr>

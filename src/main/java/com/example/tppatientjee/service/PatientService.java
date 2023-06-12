@@ -17,12 +17,12 @@ public class PatientService {
             _sessionFactory = sessionFactory;
         }
 
-        public boolean createPatient (String lastName, String firstName, String email, String tel){
+        public boolean createPatient (String lastname, String firstname, String email, String tel){
             boolean result = false;
             session = _sessionFactory.openSession();
             session.beginTransaction();
             patientRepository = new PatientRepository(session);
-            Patient patient = Patient.builder().lastName(lastName).firstName(firstName).email(email).tel(tel).build();
+            Patient patient = Patient.builder().lastName(lastname).firstName(firstname).email(email).tel(tel).build();
             try{
                 patientRepository.create(patient);
                 session.getTransaction().commit();

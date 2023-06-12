@@ -15,7 +15,7 @@ import java.io.IOException;
 public class ConsultationServlet extends HttpServlet {
     private ConsultationService consultationService;
     public void init() {
-
+        consultationService = new ConsultationService(HibernateSession.getSessionFactory());
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
