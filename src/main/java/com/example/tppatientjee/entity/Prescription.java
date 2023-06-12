@@ -2,8 +2,6 @@ package com.example.tppatientjee.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.NoArgsConstructor;
-
 import javax.persistence.*;
 import java.util.Date;
 

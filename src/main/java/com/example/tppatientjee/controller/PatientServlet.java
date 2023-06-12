@@ -35,16 +35,16 @@ public class PatientServlet extends HttpServlet {
         }
         else {
             patients = patientService.getPatients(null);
-            if(request.getParameter("lastName") != null
-                && request.getParameter("firstName") != null
+            if(request.getParameter("lastname") != null
+                && request.getParameter("firstname") != null
                 && request.getParameter("email") != null
                 && request.getParameter("tel") != null
-                && !request.getParameter("lastName").equals("")
-                && !request.getParameter("firstName").equals("")
+                && !request.getParameter("lastname").equals("")
+                && !request.getParameter("firstname").equals("")
                 && !request.getParameter("email").equals("")
                 && !request.getParameter("tel").equals("")){
-                String lastName= request.getParameter("lastName");
-                String firstName = request.getParameter("firstName");
+                String lastName= request.getParameter("lastname");
+                String firstName = request.getParameter("firstname");
                 String email = request.getParameter("email");
                 String tel = request.getParameter("tel");
                 if(patientService.createPatient(lastName, firstName, email, tel)) {

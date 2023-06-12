@@ -43,7 +43,8 @@
         <div class="btnSearch"><button type="submit" >Submit</button></div>
     </form>
     <hr>
-
+</div>
+    <div class="box2">
     <h2>Ajouter un patient :</h2>
     <hr>
     <c:if test="${isLogged == true}">
@@ -58,7 +59,7 @@
     </form>
     </c:if>
     <hr>
-
+    </div>
 </div>
 
 </div>
