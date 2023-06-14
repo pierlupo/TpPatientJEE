@@ -1,5 +1,6 @@
 package com.example.tppatientjee.controller;
 
+import com.example.tppatientjee.entity.Consultation;
 import com.example.tppatientjee.service.ConsultationService;
 import com.example.tppatientjee.util.Definition;
 import com.example.tppatientjee.util.HibernateSession;
@@ -18,20 +19,21 @@ public class ConsultationServlet extends HttpServlet {
         consultationService = new ConsultationService(HibernateSession.getSessionFactory());
     }
 
-    public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        consultationService = new ConsultationService(HibernateSession.getSessionFactory());
-        if (request.getParameter("patientId") != null && !request.getParameter("patientId").equals("")) {
-            int patientId = Integer.parseInt(request.getParameter("patientId"));
-            if (consultationService.createConsultation(patientId)) {
-                response.sendRedirect(Definition.BASE_URL + "/?id=" + patientId);
-            }
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        if(request.getParameter("id") != null && !request.getParameter("id").equals("")) {
+            int consultationId = Integer.parseInt(request.getParameter("id"));
+            Consultation consultation = consultationService.getByIdConsultation(consultationId);
+            request.setAttribute("consultation", consultation);
+            request.getRequestDispatcher(Definition.VIEW_PATH + "/consultation.jsp").forward(request, response);
         }
     }
 
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        if(request.getParameter("id") != null && (request.getParameter("id").equals(""))){
-            int consultationId = Integer.parseInt(request.getParameter("id"));
-            request.setAttribute("consultation", consultationId);
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        if(request.getParameter("patientId") != null && !request.getParameter("patientId").equals("")) {
+            int patientId = Integer.parseInt(request.getParameter("patientId"));
+            if(consultationService.createConsultation(patientId)) {
+                response.sendRedirect(Definition.BASE_URL+"/?id="+patientId);
+            }
         }
     }
 }

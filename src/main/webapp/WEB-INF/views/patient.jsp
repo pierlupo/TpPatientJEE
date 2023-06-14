@@ -37,11 +37,11 @@
     <h2>Rechercher un patient :</h2>
     <hr>
 
-<%--    <form action="" method="post">--%>
-<%--        <input type="hidden" name="action" value="search">--%>
-<%--        <div class="search"><label for="search">Recherche :</label><input type="search" name="search" id="search"  placeholder="Enter a name…"/></div>--%>
-<%--        <div class="btnSearch"><button type="submit" name="research">Rechercher</button></div>--%>
-<%--    </form>--%>
+    <form action="" method="post">
+        <input type="hidden" name="action" value="search">
+        <div class="search"><label for="search">Recherche :</label><input type="search" name="search" id="search"  placeholder="Enter a name…"/></div>
+        <div class="btnSearch"><button type="submit" name="research">Rechercher</button></div>
+    </form>
     <hr>
 </div>
     <div class="box2">
@@ -55,7 +55,7 @@
         <div><label for="email">Email :</label><input type="text" name="email" id="email" /></div>
         <div><label for="tel">Tel :</label><input type="text" name="tel" id="tel"/></div>
 <%--        <div><label for="image">Upload :</label><input type="file" name="image" id="image"/></div>--%>
-        <div class="btn"><button type="submit" name="ajouter" >Ajouter</button></div>
+        <div class="btn0"><input type="submit" name="ajouter" value="ajouter" class="btn"></div>
     </form>
     </c:if>
     <hr>

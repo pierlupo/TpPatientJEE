@@ -9,6 +9,7 @@ public  abstract class Repository<T> {
     public Repository(Session session) {
         _session = session;
     }
+
     public boolean create(T o) {
         _session.save(o);
         return true;

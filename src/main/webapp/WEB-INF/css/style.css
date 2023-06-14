@@ -81,19 +81,37 @@ button{
     margin-right: auto;
 }
 
+
+
 .box1, .box2, .box3{
     width: 30rem;
     padding: 2rem;
 }
 
+.btn0{
+    text-align: center;
+}
 .search{
     margin-left: auto;
     margin-right: auto;
-    width: 300px;
+    /*width: 300px;*/
     padding: 20px;
 }
 
 .btnSearch{
+    text-align: center;
+    border:none;
+    border-radius: 10px;
+    cursor:pointer;
+    width: 100px;
+    height: 25px;
+    background-color: var(--cambridgeblue);
+    text-transform: uppercase;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.btn{
     text-align: center;
     border:none;
     border-radius: 10px;
